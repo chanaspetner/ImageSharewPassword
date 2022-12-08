@@ -1,0 +1,32 @@
+﻿@using ImageSharePasswordData
+@model ViewImageViewModel
+
+@if (String.IsNullOrEmpty(Model.PasswordSession))
+{
+    <div class="row">
+        <div class="col-md-6 offset-md-3 jumbotron">
+            @if (Model.Valid == -1)
+            {
+                <h3 class="alert-danger">Invalid password</h3>
+            }
+            <h4>Please enter the password for this image:</h4>
+            <form method="post" action="/home/passwordcheck">
+                <input type="hidden" name="id" value="@Model.Image.Id" />
+                <input type="text" class="form-control" placeholder="Password" name="password" />
+                <br />
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <img src="/uploads/@Model.Image.ImagePath" style="width: 800px;" />
+            <br />
+            <h3>Views: @Model.Image.Views</h3>
+        </div>
+    </div>
+}
